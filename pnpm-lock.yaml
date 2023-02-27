@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@vitejs/plugin-basic-ssl': ^1.0.1
   '@vitejs/plugin-vue': ^4.0.0
   '@webcontainer/api': ^1.0.2
   typescript: ^4.9.3
@@ -13,6 +14,7 @@ dependencies:
   vue: 3.2.47
 
 devDependencies:
+  '@vitejs/plugin-basic-ssl': 1.0.1_vite@4.1.4
   '@vitejs/plugin-vue': 4.0.0_vite@4.1.4+vue@3.2.47
   '@webcontainer/api': 1.0.2
   typescript: 4.9.5
@@ -242,6 +244,15 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@vitejs/plugin-basic-ssl/1.0.1_vite@4.1.4:
+    resolution: {integrity: sha512-pcub+YbFtFhaGRTo1832FQHQSHvMrlb43974e2eS8EKleR3p1cDdkJFPci1UhwkEf1J9Bz+wKBSzqpKp7nNj2A==}
+    engines: {node: '>=14.6.0'}
+    peerDependencies:
+      vite: ^3.0.0 || ^4.0.0
+    dependencies:
+      vite: 4.1.4
+    dev: true
 
   /@vitejs/plugin-vue/4.0.0_vite@4.1.4+vue@3.2.47:
     resolution: {integrity: sha512-e0X4jErIxAB5oLtDqbHvHpJe/uWNkdpYV83AOG2xo2tEVSzCzewgJMtREZM30wXnM5ls90hxiOtAuVU6H5JgbA==}

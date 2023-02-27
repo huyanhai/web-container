@@ -24,7 +24,7 @@ export class WebContainerTerminal {
     window.addEventListener("load", async () => {
       this.webcontainerInstance = await WebContainer.boot();
       this.webcontainerInstance.mount(files);
-      (editorEl as HTMLTextAreaElement).value = await this.webcontainerInstance.fs.readFile("package.json", "utf-8");
+      (editorEl as HTMLTextAreaElement).value = await this.webcontainerInstance.fs.readFile("index.js", "utf-8");
 
       const exitCode = await this.installDependencies();
       if (exitCode !== 0) {
@@ -109,8 +109,8 @@ export class WebContainerTerminal {
     let { editorEl } = this.options;
     editorEl = typeof editorEl === "string" ? (document.querySelector(editorEl) as HTMLTextAreaElement) : editorEl;
 
-    (editorEl as HTMLTextAreaElement).addEventListener("input", (e) => {
-      console.log(e);
+    (editorEl as HTMLTextAreaElement).addEventListener("input", async (e) => {
+      await this.webcontainerInstance.fs.writeFile("index.js", (e?.currentTarget as EventTarget)?.value as string);
     });
   }
 }
