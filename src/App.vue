@@ -1,8 +1,16 @@
 <script setup lang="ts">
-import { onMounted, ref, shallowRef } from "vue";
+import { onMounted, ref } from "vue";
 import { WebContainerTerminal } from "./utils/webContainer";
 
+import { EditorView, basicSetup } from "codemirror";
+// import { javascript } from "@codemirror/lang-javascript";
+
 onMounted(async () => {
+  let editor = new EditorView({
+    doc: "123",
+    extensions: [basicSetup],
+    parent: document.querySelector(".editor") as HTMLElement,
+  });
   // const contaier = new WebContainerTerminal({
   //   terminalEl: "#terminal",
   //   editorEl: ".editor",
@@ -11,20 +19,22 @@ onMounted(async () => {
 });
 
 const arr = ref<any>([]);
+const obj: any = {};
 
 const loopDirectory = async (directorys: any, dirName: string = "") => {
   for await (const item of directorys.values()) {
-    if (item.kind === "directory") {
-      !["node_modules", ".git", ".vscode"].includes(item.name) && loopDirectory(item, item.name);
+    const { kind, name } = item;
+    if (kind === "directory") {
+      !["node_modules", ".git", ".vscode"].includes(name) && loopDirectory(item, name);
     } else {
       arr.value.push({
-        path: `${dirName ? `${dirName}/` : ""}${item.name}`,
-        name: item.name,
+        path: `${dirName ? `${dirName}/` : ""}${name}`,
+        name: name,
         file: item,
       });
     }
   }
-  console.log(arr.value);
+  console.log(obj);
 };
 
 const open = async () => {
@@ -39,7 +49,7 @@ const setInfo = async (file: any) => {
   reader.readAsText(fileBuffer);
 
   reader.onload = (data) => {
-    (document.querySelector(".editor") as HTMLTextAreaElement).value = data.target?.result as string;
+    // (document.querySelector(".editor") as HTMLTextAreaElement).value = data.target?.result as string;
   };
 };
 </script>
